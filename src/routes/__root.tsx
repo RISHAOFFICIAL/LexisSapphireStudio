@@ -89,6 +89,7 @@ function RootDocument({ children }: { children: ReactNode }) {
               className="font-heading text-xl font-bold tracking-wide text-sapphire-800 transition-colors hover:text-gold-500"
             >
               Lexis Sapphire
+              <span className="text-gold-400"> Studio</span>
             </a>
             <div className="hidden items-center gap-8 sm:flex">
               {[
