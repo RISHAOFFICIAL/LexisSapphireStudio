@@ -81,6 +81,7 @@ const PROJECTS = [
     description:
       "A polished, trust-building website for a Ferndale-based tax preparation and bookkeeping firm. Clean layout, clear service breakdown, and prominent contact information.",
     gradient: "from-emerald-800 via-emerald-600 to-slate-700",
+    image: "https://files.manuscdn.com/user_upload_by_module/web_dev_logo/110433228/ibYujiRLVNrymYHl.png",
     link: "/ajackstax",
   },
   {
@@ -290,14 +291,24 @@ function Home() {
                   <div
                     className="group relative overflow-hidden rounded-xl bg-white shadow-md shadow-sapphire-900/5 transition-all duration-500 hover:shadow-xl hover:shadow-sapphire-900/10 hover:-translate-y-1"
                   >
-                    {/* Project card gradient */}
-                    <div
-                      className={`aspect-[4/3] bg-gradient-to-br ${project.gradient} flex items-center justify-center p-6 transition-transform duration-500 group-hover:scale-105`}
-                    >
-                      <span className="font-heading text-2xl font-bold tracking-wide text-white/90 drop-shadow-sm">
-                        {project.title}
-                      </span>
-                    </div>
+                    {/* Project card gradient or image */}
+                    {project.image ? (
+                      <div className="aspect-[4/3] flex items-center justify-center bg-gradient-to-br from-emerald-100 via-white to-emerald-50 p-6 transition-transform duration-500 group-hover:scale-105">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="h-20 w-20 rounded-2xl object-contain shadow-md"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className={`aspect-[4/3] bg-gradient-to-br ${project.gradient} flex items-center justify-center p-6 transition-transform duration-500 group-hover:scale-105`}
+                      >
+                        <span className="font-heading text-2xl font-bold tracking-wide text-white/90 drop-shadow-sm">
+                          {project.title}
+                        </span>
+                      </div>
+                    )}
                     <div className="p-6">
                       <span className="text-xs font-semibold tracking-wider text-gold-500 uppercase">
                         {project.tag}
