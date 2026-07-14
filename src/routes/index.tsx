@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { readFile } from "node:fs/promises";
 import { useEffect, useRef, useState } from "react";
@@ -76,11 +76,12 @@ function RevealSection({
 /* ---------- Placeholder project data ---------- */
 const PROJECTS = [
   {
-    title: "Maison Lumière",
-    tag: "E-Commerce / Luxury Retail",
+    title: "A Jack's Tax Service",
+    tag: "Professional Services / Tax",
     description:
-      "A bespoke e-commerce experience for a high-end home fragrance brand. Custom product filtering, seamless checkout, and a rich editorial layout.",
-    gradient: "from-sapphire-800 via-sapphire-600 to-gold-500",
+      "A polished, trust-building website for a Ferndale-based tax preparation and bookkeeping firm. Clean layout, clear service breakdown, and prominent contact information.",
+    gradient: "from-emerald-800 via-emerald-600 to-slate-700",
+    link: "/ajackstax",
   },
   {
     title: "Atelier Verve",
@@ -284,38 +285,47 @@ function Home() {
             </div>
 
             <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {PROJECTS.map((project) => (
-                <div
-                  key={project.title}
-                  className="group relative overflow-hidden rounded-xl bg-white shadow-md shadow-sapphire-900/5 transition-all duration-500 hover:shadow-xl hover:shadow-sapphire-900/10 hover:-translate-y-1"
-                >
-                  {/* Project card gradient */}
+              {PROJECTS.map((project) => {
+                const CardContent = (
                   <div
-                    className={`aspect-[4/3] bg-gradient-to-br ${project.gradient} flex items-center justify-center p-6 transition-transform duration-500 group-hover:scale-105`}
+                    className="group relative overflow-hidden rounded-xl bg-white shadow-md shadow-sapphire-900/5 transition-all duration-500 hover:shadow-xl hover:shadow-sapphire-900/10 hover:-translate-y-1"
                   >
-                    <span className="font-heading text-2xl font-bold tracking-wide text-white/90 drop-shadow-sm">
-                      {project.title}
-                    </span>
-                  </div>
-                  <div className="p-6">
-                    <span className="text-xs font-semibold tracking-wider text-gold-500 uppercase">
-                      {project.tag}
-                    </span>
-                    <h3 className="mt-2 font-heading text-lg font-bold text-sapphire-900">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-sapphire-500">
-                      {project.description}
-                    </p>
-                    <div className="mt-4 flex items-center gap-1 text-xs font-medium text-sapphire-600 transition-colors group-hover:text-gold-500">
-                      <span>View Case Study</span>
-                      <span className="transition-transform group-hover:translate-x-1">
-                        →
+                    {/* Project card gradient */}
+                    <div
+                      className={`aspect-[4/3] bg-gradient-to-br ${project.gradient} flex items-center justify-center p-6 transition-transform duration-500 group-hover:scale-105`}
+                    >
+                      <span className="font-heading text-2xl font-bold tracking-wide text-white/90 drop-shadow-sm">
+                        {project.title}
                       </span>
                     </div>
+                    <div className="p-6">
+                      <span className="text-xs font-semibold tracking-wider text-gold-500 uppercase">
+                        {project.tag}
+                      </span>
+                      <h3 className="mt-2 font-heading text-lg font-bold text-sapphire-900">
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-sapphire-500">
+                        {project.description}
+                      </p>
+                      <div className="mt-4 flex items-center gap-1 text-xs font-medium text-sapphire-600 transition-colors group-hover:text-gold-500">
+                        <span>{project.link ? "View Live Site" : "View Case Study"}</span>
+                        <span className="transition-transform group-hover:translate-x-1">
+                          →
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+
+                return project.link ? (
+                  <Link key={project.title} to={project.link}>
+                    {CardContent}
+                  </Link>
+                ) : (
+                  <div key={project.title}>{CardContent}</div>
+                );
+              })}
             </div>
           </div>
         </section>
